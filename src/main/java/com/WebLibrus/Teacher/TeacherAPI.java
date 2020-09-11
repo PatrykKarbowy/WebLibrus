@@ -1,4 +1,4 @@
-package com.WebLibrus;
+package com.WebLibrus.Teacher;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,25 +10,25 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping("/api/teachers")
 @Slf4j
 @RequiredArgsConstructor
-public class StudentAPI {
-    private final StudentService studentService;
+public class TeacherAPI {
+    private final TeacherService teacherService;
 
     @GetMapping
-    public ResponseEntity<List<Student>> findAll() {
-        return ResponseEntity.ok(studentService.findAll());
+    public ResponseEntity<List<Teacher>> findAll() {
+        return ResponseEntity.ok(teacherService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody Student student) {
-        return ResponseEntity.ok(studentService.save(student));
+    public ResponseEntity create(@Valid @RequestBody Teacher student) {
+        return ResponseEntity.ok(teacherService.save(student));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> findById(@PathVariable Long id) {
-        Optional<Student> stock = studentService.findById(id);
+    public ResponseEntity<Teacher> findById(@PathVariable Long id) {
+        Optional<Teacher> stock = teacherService.findById(id);
         if (!stock.isPresent()) {
             log.error("Id " + id + " is not in the list");
             return ResponseEntity.badRequest().build();
@@ -37,24 +37,24 @@ public class StudentAPI {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> update(@PathVariable Long id, @Valid @RequestBody Student student) {
-        Optional<Student> stock = studentService.findById(id);
+    public ResponseEntity<Teacher> update(@PathVariable Long id, @Valid @RequestBody Teacher student) {
+        Optional<Teacher> stock = teacherService.findById(id);
         if (!stock.isPresent()) {
             log.error("Id " + id + " is not in the list");
             return ResponseEntity.badRequest().build();
         }
         student.setId(id);
-        studentService.save(student);
+        teacherService.save(student);
         return ResponseEntity.ok().build();
 }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Student> delete(@PathVariable Long id) {
-        if (!studentService.findById(id).isPresent()) {
+    public ResponseEntity<Teacher> delete(@PathVariable Long id) {
+        if (!teacherService.findById(id).isPresent()) {
             log.error("Id " + id + " is not in the list");
             return ResponseEntity.badRequest().build();
         }
-        studentService.deleteById(id);
+        teacherService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }

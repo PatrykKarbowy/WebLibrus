@@ -1,4 +1,4 @@
-package com.WebLibrus;
+package com.WebLibrus.Student;
 
 public class StudentController {
 }

@@ -1,4 +1,4 @@
-package com.WebLibrus;
+package com.WebLibrus.Student;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

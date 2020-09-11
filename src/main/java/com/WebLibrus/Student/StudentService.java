@@ -1,4 +1,4 @@
-package com.WebLibrus;
+package com.WebLibrus.Student;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
