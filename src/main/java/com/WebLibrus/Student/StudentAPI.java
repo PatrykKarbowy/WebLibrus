@@ -2,6 +2,7 @@ package com.WebLibrus.Student;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class StudentAPI {
+    @Autowired
     private final StudentService studentService;
 
     @GetMapping
@@ -33,6 +35,12 @@ public class StudentAPI {
             log.error("Id " + id + " is not in the list");
             return ResponseEntity.badRequest().build();
         }
+        return ResponseEntity.ok(stock.get());
+    }
+
+    @GetMapping("findByName/{studentFirstName}")
+    public ResponseEntity<Student> findByStudentFirstName(@PathVariable String studentFirstName){
+        Optional<Student> stock = studentService.findByStudentFirstName(studentFirstName);
         return ResponseEntity.ok(stock.get());
     }
 

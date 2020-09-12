@@ -1,6 +1,5 @@
 package com.WebLibrus.Student;
 
-import com.WebLibrus.Subjects.Subject;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
