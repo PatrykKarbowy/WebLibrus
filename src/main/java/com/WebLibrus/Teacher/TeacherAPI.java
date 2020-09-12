@@ -1,5 +1,6 @@
 package com.WebLibrus.Teacher;
 
+import com.WebLibrus.Student.Student;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,8 @@ public class TeacherAPI {
     }
 
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody Teacher student) {
-        return ResponseEntity.ok(teacherService.save(student));
+    public ResponseEntity create(@Valid @RequestBody Teacher teacher) {
+        return ResponseEntity.ok(teacherService.save(teacher));
     }
 
     @GetMapping("/{id}")
@@ -37,14 +38,14 @@ public class TeacherAPI {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Teacher> update(@PathVariable Long id, @Valid @RequestBody Teacher student) {
+    public ResponseEntity<Teacher> update(@PathVariable Long id, @Valid @RequestBody Teacher teacher) {
         Optional<Teacher> stock = teacherService.findById(id);
         if (!stock.isPresent()) {
             log.error("Id " + id + " is not in the list");
             return ResponseEntity.badRequest().build();
         }
-        student.setId(id);
-        teacherService.save(student);
+        teacher.setId(id);
+        teacherService.save(teacher);
         return ResponseEntity.ok().build();
 }
 
@@ -55,6 +56,12 @@ public class TeacherAPI {
             return ResponseEntity.badRequest().build();
         }
         teacherService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<List<Student>> deleteAll(){
+        teacherService.deleteAll();
         return ResponseEntity.ok().build();
     }
 }
