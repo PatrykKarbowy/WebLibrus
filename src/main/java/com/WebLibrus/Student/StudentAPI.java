@@ -63,4 +63,5 @@ public class StudentAPI {
         studentService.deleteAll();
         return ResponseEntity.ok().build();
     }
+
 }

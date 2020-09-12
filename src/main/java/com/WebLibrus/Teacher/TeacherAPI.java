@@ -64,4 +64,5 @@ public class TeacherAPI {
         teacherService.deleteAll();
         return ResponseEntity.ok().build();
     }
+
 }
