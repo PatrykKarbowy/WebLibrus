@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +25,8 @@ public class StudentAPI {
     }
 
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody Student student) {
-        return ResponseEntity.ok(studentService.save(student));
+    public Response create(@Valid @RequestBody Student student) {
+        return Response.status(Response.Status.ACCEPTED).entity("OK").build();
     }
 
     @GetMapping("/{id}")
