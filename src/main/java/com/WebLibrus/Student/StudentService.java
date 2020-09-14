@@ -1,5 +1,9 @@
 package com.WebLibrus.Student;
 
+import com.WebLibrus.Subjects.Subject;
+import com.WebLibrus.Subjects.SubjectRepository;
+import com.WebLibrus.commands.AssignSubjectToStudentCommand;
+import com.WebLibrus.commands.CreateStudentCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +14,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class StudentService {
     @Autowired
-    private final StudentRepository studentRepository;
+    private  StudentRepository studentRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
 
     public List<Student> findAll(){
         return studentRepository.findAll();
@@ -36,4 +42,36 @@ public class StudentService {
         return studentRepository.findByStudentFirstName(name);
     }
 
+    public CreateStudentDTO createNewStudent(CreateStudentCommand student) {
+        Student newStudent = Student.builder().studentAge(student.getStudentAge()).studentFirstName(student.getStudentFirstName()).studentLastName(student.getStudentLastName()).build();
+        studentRepository.save(newStudent);
+        return CreateStudentDTO.from(newStudent);
+    }
+
+    public void assignSubjectTOStudent(AssignSubjectToStudentCommand command) {
+        Optional<Subject> subjectOptional = subjectRepository.findById((long) command.getSubjectId());
+        Subject subject = null;
+        if (subjectOptional.isPresent()){
+             subject = subjectOptional.get();
+        }
+        Optional<Student> studentOptional = studentRepository.findById((long) command.getStudentId());
+        Student student = null;
+        if (studentOptional.isPresent()) {
+             student = studentOptional.get();
+        }
+
+        // Mamy przedmiot + studenta, teraz przypiszemy ten przedmiot studentowi
+            assignSubjectToStudent(student, subject);
+    }
+
+
+    private void assignSubjectToStudent (Student student, Subject subject) {
+        if (student != null && subject != null) {
+            Subject subject1 = new Subject();
+            subject1.setStudent(student);
+            subject1.setSubjectName(subject.getSubjectName());
+            subjectRepository.save(subject1);
+        }
+
+    }
 }

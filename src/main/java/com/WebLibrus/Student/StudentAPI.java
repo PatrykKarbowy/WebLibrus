@@ -1,5 +1,7 @@
 package com.WebLibrus.Student;
 
+import com.WebLibrus.commands.AssignSubjectToStudentCommand;
+import com.WebLibrus.commands.CreateStudentCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +31,32 @@ public class StudentAPI {
     }
 
     @PostMapping
-    public Response create(@Valid @RequestBody Student student) {
-        return Response.status(Response.Status.ACCEPTED).entity("OK").build();
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response create(@Valid @RequestBody CreateStudentCommand student) throws Exception {
+        Response result = null;
+        try {
+            CreateStudentDTO dto = studentService.createNewStudent(student);
+            result = Response.status(Response.Status.OK).entity(dto).build();
+        }catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
+        return result;
+    }
+
+    @PostMapping
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response assignSubjectToStudent(@Valid @RequestBody AssignSubjectToStudentCommand command) throws Exception {
+        // TODO: Kazdy przedmiot jest wpisane w bazie i ma unikalne ID
+        Response result = null;
+        try {
+            studentService.assignSubjectTOStudent(command);
+            result = Response.status(Response.Status.OK).build();
+        }catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
+        return result;
     }
 
     @GetMapping("/{id}")
