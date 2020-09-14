@@ -37,6 +37,12 @@ public class SubjectAPI {
         return ResponseEntity.ok(stock.get());
     }
 
+    @GetMapping("findByName/{subjectName}")
+    public ResponseEntity<Subject> findBySubjectName(@PathVariable String subjectName){
+        Optional<Subject> stock = subjectService.findBySubjectName(subjectName);
+        return ResponseEntity.ok(stock.get());
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Subject> update(@PathVariable Long id, @Valid @RequestBody Subject subject) {
         Optional<Subject> stock = subjectService.findById(id);

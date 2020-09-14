@@ -8,25 +8,29 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class TeacherService {
-    private final TeacherRepository studentRepository;
+    private final TeacherRepository teacherRepository;
 
     public List<Teacher> findAll(){
-        return studentRepository.findAll();
+        return teacherRepository.findAll();
     }
 
     public Optional<Teacher> findById(Long id){
-        return studentRepository.findById(id);
+        return teacherRepository.findById(id);
     }
 
     public Teacher save(Teacher stock){
-        return studentRepository.save(stock);
+        return teacherRepository.save(stock);
     }
 
     public void deleteById(Long id){
-        studentRepository.deleteById(id);
+        teacherRepository.deleteById(id);
     }
 
     public void deleteAll(){
-        studentRepository.deleteAll();
+        teacherRepository.deleteAll();
+    }
+
+    public Optional<Teacher> findByTeacherFirstName(String name){
+        return teacherRepository.findByTeacherFirstName(name);
     }
 }

@@ -37,6 +37,12 @@ public class TeacherAPI {
         return ResponseEntity.ok(stock.get());
     }
 
+    @GetMapping("findByName/{teacherFirstName}")
+    public ResponseEntity<Teacher> findByTeacherFirstName(@PathVariable String teacherFirstName){
+        Optional<Teacher> stock = teacherService.findByTeacherFirstName(teacherFirstName);
+        return ResponseEntity.ok(stock.get());
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Teacher> update(@PathVariable Long id, @Valid @RequestBody Teacher teacher) {
         Optional<Teacher> stock = teacherService.findById(id);

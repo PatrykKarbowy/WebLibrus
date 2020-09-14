@@ -1,5 +1,6 @@
 package com.WebLibrus.Subjects;
 
+import com.WebLibrus.Student.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,9 @@ public class SubjectService {
 
     public void deleteAll(){
         subjectRepository.deleteAll();
+    }
+
+    public Optional<Subject> findBySubjectName(String name){
+        return subjectRepository.findBySubjectName(name);
     }
 }
