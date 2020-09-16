@@ -44,7 +44,7 @@ public class StudentAPI {
         return result;
     }
 
-    @PostMapping
+    @PostMapping("/assign")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response assignSubjectToStudent(@Valid @RequestBody AssignSubjectToStudentCommand command) throws Exception {

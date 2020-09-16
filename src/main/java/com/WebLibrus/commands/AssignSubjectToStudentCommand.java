@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class AssignSubjectToStudentCommand {
 
-
     private int subjectId;
     private int studentId;
 }

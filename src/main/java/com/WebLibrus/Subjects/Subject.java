@@ -10,14 +10,14 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "Subject")
+@Table(name = "subject")
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String subjectName;
 
-
+    @ManyToOne
     @JoinColumn(name = "student_id" , nullable = false)
     private Student student;
 

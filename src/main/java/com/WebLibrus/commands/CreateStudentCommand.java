@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class CreateStudentCommand {
 
-
     private String studentFirstName;
     private String studentLastName;
     private int studentAge;
