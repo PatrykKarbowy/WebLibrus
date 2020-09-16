@@ -1,12 +1,16 @@
 package com.WebLibrus.Subjects;
 
-import com.WebLibrus.Student.Student;
+import com.WebLibrus.commands.CreateSubjectCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +27,17 @@ public class SubjectAPI {
     }
 
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody Subject subject) {
-        return ResponseEntity.ok(subjectService.save(subject));
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response create(@Valid @RequestBody CreateSubjectCommand subject) throws Exception {
+        Response result = null;
+        try {
+            CreateSubjectDTO dto = subjectService.createNewSubject(subject);
+            result = Response.status(Response.Status.OK).entity(dto).build();
+        }catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
+        return result;
     }
 
     @GetMapping("/{id}")
@@ -60,7 +73,7 @@ public class SubjectAPI {
     }
 
     @DeleteMapping
-    public ResponseEntity<List<Student>> deleteAll(){
+    public ResponseEntity<List<Subject>> deleteAll(){
         subjectService.deleteAll();
         return ResponseEntity.ok().build();
     }

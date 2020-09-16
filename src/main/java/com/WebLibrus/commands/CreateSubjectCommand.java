@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode
 @NoArgsConstructor
-public class CreateStudentCommand {
+public class CreateSubjectCommand {
 
-    private String studentFirstName;
-    private String studentLastName;
-    private int studentAge;
+    private String subjectName;
+
 }

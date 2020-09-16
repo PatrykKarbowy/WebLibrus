@@ -1,6 +1,7 @@
 package com.WebLibrus.Subjects;
 
 import com.WebLibrus.Student.Student;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "subject")
+@Builder
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

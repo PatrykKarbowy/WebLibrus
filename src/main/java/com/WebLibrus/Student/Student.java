@@ -25,7 +25,6 @@ public class Student {
 
     @Column(name = "subject")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
-    @ElementCollection
     private Set<Subject> subject = new HashSet<>();
 
     @CreationTimestamp
