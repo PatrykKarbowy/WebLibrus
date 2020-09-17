@@ -3,6 +3,7 @@ package com.WebLibrus.Subjects;
 import com.WebLibrus.commands.CreateSubjectCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class SubjectAPI {
+    @Autowired
     private final SubjectService subjectService;
 
     @GetMapping
@@ -30,7 +32,7 @@ public class SubjectAPI {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(@Valid @RequestBody CreateSubjectCommand subject) throws Exception {
-        Response result = null;
+        Response result;
         try {
             CreateSubjectDTO dto = subjectService.createNewSubject(subject);
             result = Response.status(Response.Status.OK).entity(dto).build();

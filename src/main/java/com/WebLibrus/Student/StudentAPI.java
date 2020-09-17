@@ -29,11 +29,11 @@ public class StudentAPI {
         return ResponseEntity.ok(studentService.findAll());
     }
 
-    @PostMapping
+    @PostMapping("/add")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(@Valid @RequestBody CreateStudentCommand student) throws Exception {
-        Response result = null;
+        Response result;
         try {
             CreateStudentDTO dto = studentService.createNewStudent(student);
             result = Response.status(Response.Status.OK).entity(dto).build();

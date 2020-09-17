@@ -8,7 +8,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -25,7 +24,7 @@ public class Student {
 
     @Column(name = "subject")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
-    private Set<Subject> subject = new HashSet<>();
+    private Set<Subject> subject;
 
     @CreationTimestamp
     private Date createdAt;
