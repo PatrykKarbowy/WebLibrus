@@ -1,8 +1,10 @@
 package com.WebLibrus.Student;
 
 import com.WebLibrus.Subjects.Subject;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,6 +15,8 @@ import java.util.Set;
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
