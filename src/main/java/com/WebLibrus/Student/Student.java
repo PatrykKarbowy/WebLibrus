@@ -15,6 +15,7 @@ import java.util.Set;
 @Data
 @Entity
 @Builder
+@Table(name = "student")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {

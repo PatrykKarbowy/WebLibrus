@@ -24,8 +24,8 @@ public class Subject {
     private String subjectName;
 
 
-    @ManyToOne
-    @JoinColumn(name = "student_id" , nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Student.class)
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @CreationTimestamp
