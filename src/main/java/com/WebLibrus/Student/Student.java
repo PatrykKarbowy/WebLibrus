@@ -23,12 +23,11 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String studentFirstName;
-    @Column(name = "student_last_name")
     private String studentLastName;
     private int studentAge;
 
     @Column(name = "subject")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")
     private Set<Subject> subject;
 
     @CreationTimestamp
