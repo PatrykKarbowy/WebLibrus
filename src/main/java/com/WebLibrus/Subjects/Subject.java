@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,9 +24,9 @@ public class Subject {
     private Long Id;
     private String subjectName;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Student.class)
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Student.class)
+    @JoinColumn(name = "student_id", nullable = false)
+    private Set<Student> student;
 
     @CreationTimestamp
     private Date createdAt;

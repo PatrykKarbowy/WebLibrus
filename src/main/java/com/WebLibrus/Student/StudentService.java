@@ -4,6 +4,7 @@ import com.WebLibrus.Subjects.Subject;
 import com.WebLibrus.Subjects.SubjectRepository;
 import com.WebLibrus.commands.AssignSubjectToStudentCommand;
 import com.WebLibrus.commands.CreateStudentCommand;
+import com.google.common.collect.ImmutableSet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,10 +68,8 @@ public class StudentService {
 
     private void assignSubjectToStudent (Student student, Subject subject) {
         if (student != null && subject != null) {
-            Subject subject1 = new Subject();
-            subject1.setStudent(student);
-            subject1.setSubjectName(subject.getSubjectName());
-            subjectRepository.save(subject1);
+            subject.setStudent(ImmutableSet.of(student));
+            subjectRepository.save(subject);
         }
 
     }

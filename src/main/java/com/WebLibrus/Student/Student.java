@@ -27,7 +27,7 @@ public class Student {
     private int studentAge;
 
     @Column(name = "subject")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")
     private Set<Subject> subject;
 
     @CreationTimestamp
