@@ -24,7 +24,7 @@ public class Subject {
     private Long Id;
     private String subjectName;
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Student.class)
+    @ManyToMany
     @JoinColumn(name = "student_id", nullable = false)
     private Set<Student> student;
 
